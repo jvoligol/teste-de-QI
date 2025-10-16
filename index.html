@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#667eea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Teste de Q.I. Comportamental Avançado</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de Q.I. Comportamental Avançado</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Tela Inicial -->
+    <div class="start-screen" id="startScreen">
+      <div class="logo">🧠</div>
+      <h1>Teste de Q.I. Comportamental</h1>
+      <p>Análise profunda baseada em psicologia comportamental e neurociência cognitiva</p>
+
+      <div class="info-box">
+        <div class="info-item">
+          <span class="info-icon">📋</span>
+          <span>10 perguntas científicas sobre padrões cognitivos</span>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">⏱️</span>
+          <span>45 segundos por pergunta</span>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🎯</span>
+          <span>Análise baseada em Big Five e estilos cognitivos</span>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🔒</span>
+          <span>Relatório completo por apenas R$ 4,00</span>
+        </div>
+      </div>
+
+      <button class="btn-start" onclick="startQuiz()">Começar Teste 🚀</button>
+    </div>
+
+    <!-- Tela do Quiz -->
+    <div class="quiz-screen" id="quizScreen">
+      <div class="header">
+        <div class="progress-info">
+          <span>Questão <span id="currentQ">1</span>/10</span>
+          <span class="timer-display" id="timerDisplay">⏱️ <span id="timerCount">45</span>s</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="quiz-content">
+        <div class="question-category" id="questionCategory"></div>
+        <div class="question-text" id="questionText"></div>
+        <div class="options" id="optionsContainer"></div>
+        <button class="btn-next" id="btnNext" onclick="nextQuestion()">Próxima →</button>
+      </div>
+    </div>
+
+    <!-- Tela de Pré-Resultado -->
+    <div class="preview-screen" id="previewScreen">
+      <div class="preview-emoji">🎉</div>
+      <h2>Teste Concluído!</h2>
+      <p class="preview-text">Seu perfil cognitivo foi analisado com base em 10 parâmetros comportamentais.</p>
+      
+      <div class="preview-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="completionRate">100%</span>
+          <span class="stat-label">Taxa de Conclusão</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="avgTime">32s</span>
+          <span class="stat-label">Tempo Médio</span>
+        </div>
+      </div>
+
+      <div class="unlock-box">
+        <h3>🔓 Desbloqueie seu Relatório Completo</h3>
+        <ul class="unlock-benefits">
+          <li>✅ Score de Q.I. Comportamental detalhado</li>
+          <li>✅ Análise dos 5 fatores de personalidade</li>
+          <li>✅ Perfil cognitivo completo (8 páginas)</li>
+          <li>✅ Pontos fortes e áreas de desenvolvimento</li>
+          <li>✅ Recomendações personalizadas</li>
+        </ul>
+        <div class="price-tag">
+          <span class="price-old">R$ 29,90</span>
+          <span class="price-new">R$ 4,00</span>
+          <span class="price-badge">87% OFF</span>
+        </div>
+        <button class="btn-unlock" onclick="showPayment()">Desbloquear Agora 💳</button>
+      </div>
+    </div>
+
+    <!-- Tela de Pagamento -->
+    <div class="payment-screen" id="paymentScreen">
+      <button class="btn-back" onclick="backToPreview()">← Voltar</button>
+      
+      <h2>Pagamento Seguro</h2>
+      <p class="payment-subtitle">Mercado Pago - Ambiente 100% Seguro</p>
+
+      <div class="payment-summary">
+        <div class="summary-item">
+          <span>Relatório Completo de Q.I.</span>
+          <span class="summary-price">R$ 4,00</span>
+        </div>
+      </div>
+
+      <div class="payment-methods">
+        <button class="payment-method active" onclick="selectPaymentMethod('pix')">
+          <span class="method-icon">📱</span>
+          <span>PIX</span>
+          <span class="method-badge">Instantâneo</span>
+        </button>
+        <button class="payment-method" onclick="selectPaymentMethod('card')">
+          <span class="method-icon">💳</span>
+          <span>Cartão</span>
+        </button>
+      </div>
+
+      <div id="pixPayment" class="pix-payment">
+        <div class="qr-code-container" id="qrCodeContainer">
+          <div class="loading-spinner">Gerando QR Code...</div>
+        </div>
+        <div class="pix-instructions">
+          <p><strong>Como pagar:</strong></p>
+          <ol>
+            <li>Abra o app do seu banco</li>
+            <li>Escolha pagar com PIX</li>
+            <li>Escaneie o QR Code acima</li>
+            <li>Confirme o pagamento de R$ 4,00</li>
+          </ol>
+          <button class="btn-copy-pix" id="copyPixBtn" onclick="copyPixCode()">
+            📋 Copiar Código PIX
+          </button>
+        </div>
+        <div class="payment-status" id="paymentStatus">
+          Aguardando pagamento...
+        </div>
+      </div>
+
+      <div id="cardPayment" class="card-payment" style="display: none;">
+        <p class="coming-soon">Em breve disponível</p>
+      </div>
+    </div>
+
+    <!-- Tela de Resultado Final -->
+    <div class="result-screen" id="resultScreen">
+      <div class="result-header">
+        <div class="result-emoji" id="resultEmoji">🎉</div>
+        <h2>Seu Relatório Completo</h2>
+      </div>
+      
+      <div class="result-score">
+        <div class="qi-number" id="qiNumber">0</div>
+        <div class="qi-label">Q.I. Comportamental</div>
+      </div>
+
+      <div class="result-profile" id="resultProfile">Seu Perfil</div>
+      <div class="result-description" id="resultDescription">Descrição do perfil</div>
+
+      <div class="detailed-analysis">
+        <h3>Análise Detalhada dos 5 Fatores</h3>
+        <div id="bigFiveAnalysis"></div>
+      </div>
+
+      <button class="btn-download">📥 Baixar Relatório PDF</button>
+      <button class="btn-restart" onclick="restartQuiz()">🔄 Fazer Novamente</button>
+    </div>
+  </div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/payment.js"></script>
+</body>
+</html>
